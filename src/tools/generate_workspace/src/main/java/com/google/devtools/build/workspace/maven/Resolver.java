@@ -182,7 +182,7 @@ public class Resolver {
 
         if (parent != null) {
           parent.addDependency(artifactRule);
-          parent.getDependencies().addAll(artifactRule.getDependencies());
+//          parent.getDependencies().addAll(artifactRule.getDependencies());
         } else {
           addArtifact(artifactRule, modelSource.getLocation());
         }

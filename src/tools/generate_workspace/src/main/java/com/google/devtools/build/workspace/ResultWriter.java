@@ -53,10 +53,14 @@ public class ResultWriter {
       outputStream.println("    visibility = [\"//visibility:public\"],");
       outputStream.println("    exports = [");
       outputStream.println("        \"@" + rule.name() + "//jar\",");
+      outputStream.println("    ],");
+      if (rule.getDependencies().size() > 0) {
+      outputStream.println("    runtime_depos = [");
       for (Rule r : rule.getDependencies()) {
-        outputStream.println("        \"@" + r.name() + "//jar\",");
+        outputStream.println("        \":" + r.name() + "\",");
       }
       outputStream.println("    ],");
+      }
       outputStream.println(")");
       outputStream.println();
     }
