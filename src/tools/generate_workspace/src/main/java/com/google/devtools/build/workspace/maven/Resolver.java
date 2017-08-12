@@ -72,7 +72,7 @@ public class Resolver {
   public static Artifact getArtifact(Dependency dependency)
       throws InvalidArtifactCoordinateException {
     return getArtifact(dependency.getGroupId() + ":" + dependency.getArtifactId() + ":"
-        + dependency.getVersion());
+        + fixVersion(dependency.getVersion()));
   }
   
   private static final String COMPILE_SCOPE = "compile";
@@ -136,6 +136,10 @@ public class Resolver {
     deps.put(rule.name(), rule); // add the artifact rule to the workspace
     resolveEffectiveModel(modelSource, Sets.<String>newHashSet(), rule);
   }
+
+  private static String fixVersion(String version) {
+    return version.replace("[", "").replace("]", "");
+  }
   
   /**
    * Resolves all dependencies from a given "model source," which could be either a URL or a local
@@ -170,7 +174,7 @@ public class Resolver {
         boolean isNewDependency = addArtifact(artifactRule, model.toString());
         if (isNewDependency) {
           ModelSource depModelSource = modelResolver.resolveModel(
-              dependency.getGroupId(), dependency.getArtifactId(), dependency.getVersion());
+              dependency.getGroupId(), dependency.getArtifactId(), fixVersion(dependency.getVersion()));
           if (depModelSource != null) {
             artifactRule.setRepository(depModelSource.getLocation(), handler);
             artifactRule.setSha1(downloadSha1(artifactRule));
