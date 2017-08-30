@@ -87,9 +87,10 @@ public class DefaultModelResolver implements ModelResolver {
   public ModelSource resolveModel(String groupId, String artifactId, String version)
       throws UnresolvableModelException {
     String ruleName = Rule.name(groupId, artifactId);
-    if (ruleNameToModelSource.containsKey(ruleName)) {
-      return ruleNameToModelSource.get(ruleName);
-    }
+//    if (ruleNameToModelSource.containsKey(ruleName)) {
+//      System.out.println("cached " + ruleName + " -> " + ruleNameToModelSource.get(ruleName));
+//      return ruleNameToModelSource.get(ruleName);
+//    }
     for (Repository repository : repositories) {
       UrlModelSource modelSource = getModelSource(
           repository.getUrl(), groupId, artifactId, version);

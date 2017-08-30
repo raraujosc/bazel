@@ -55,7 +55,7 @@ public class ResultWriter {
       outputStream.println("        \"@" + rule.name() + "//jar\",");
       outputStream.println("    ],");
       if (rule.getDependencies().size() > 0) {
-      outputStream.println("    runtime_depos = [");
+      outputStream.println("    runtime_deps = [");
       for (Rule r : rule.getDependencies()) {
         outputStream.println("        \":" + r.name() + "\",");
       }
